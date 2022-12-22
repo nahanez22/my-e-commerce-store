@@ -4,7 +4,7 @@ export const gifts = [
     Titulo: "Auricular",
     imagen: "/src/images/auricular.webp",
     precio: "$989.900",
-    cantidad: 1,
+    cantidad: 2,
   },
 
   {

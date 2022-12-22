@@ -34,7 +34,7 @@ const Gift = ({ gift, handleAdd, handleRemove, inCart }) => {
         />
         <h2>{gift.Titulo}</h2>
         <p>{gift.precio}</p>
-        <p>Cantidad: {gift.cantidad}</p>
+        <p>Cantidad disponible: {gift.cantidad}</p>
         <form
           onSubmit={(event) => {
             event.preventDefault(); // Prevenir el envío del formulario
@@ -42,14 +42,14 @@ const Gift = ({ gift, handleAdd, handleRemove, inCart }) => {
             handleRemove(gift.id); // Eliminar el regalo de la lista de regalos
           }}
         >
-          <label htmlFor="quantity">Cantidad:</label>
+          <label htmlFor="quantity">Cantidad a comprar:</label>
           <input
             type="number"
             id="quantity"
             value={quantity}
             onChange={(event) => setQuantity(event.target.value)}
           />
-          <button type="submit">Agregar al saco</button>
+          <button type="submit">Agregar al carrito</button>
         </form>
       </main>
     );

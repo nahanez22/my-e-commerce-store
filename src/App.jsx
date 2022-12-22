@@ -6,17 +6,17 @@ import { gifts } from "./data/gifts";
 
 const App = () => {
   // Estado del carrito de compras
-  const [saco, setSaco] = useState([]);
+  const [cart, setCart] = useState([]);
 
   // Método para agregar un regalo al carrito de compras
   const handleAdd = (gift, quantity) => {
     const newGift = { ...gift, cantidad: quantity }; // Crear una copia del regalo y agregar la cantidad seleccionada
-    setSaco([...saco, newGift]); // Agregar el regalo al carrito de compras
+    setCart([...cart, newGift]); // Agregar el regalo al carrito de compras
   };
 
   // Método para eliminar un regalo del carrito de compras
   const handleRemove = (id) => {
-    setSaco(saco.filter((gift) => gift.id !== id));
+    setCart(cart.filter((gift) => gift.id !== id));
   };
 
   return (
@@ -33,7 +33,7 @@ const App = () => {
         />
         <Route
           path="/carrito"
-          element={<Carrito saco={saco} handleRemove={handleRemove} />}
+          element={<Carrito cart={cart} handleRemove={handleRemove} />}
         />
       </Routes>
     </div>
