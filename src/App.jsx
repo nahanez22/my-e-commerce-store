@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import GiftsList from "./components/GiftsList";
-import Carrito from "./components/Carrito";
+import Carrito from "./pages/Carrito";
 import { gifts } from "./data/gifts";
+import Login from "./pages/Login";
 
 const App = () => {
   // Estado del carrito de compras
@@ -21,6 +22,7 @@ const App = () => {
 
   return (
     <div>
+      <Login />
       <Routes>
         <Route
           path="/"

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Gift from "./Gift";
+import Gift from "../components/Gift";
 
 const Carrito = ({ cart, handleRemove }) => {
   return (
