@@ -4,6 +4,7 @@ import GiftsList from "./components/GiftsList";
 import Carrito from "./pages/Carrito";
 import { gifts } from "./data/gifts";
 import Login from "./pages/Login";
+import NotFound from "./pages/NotFound";
 
 const App = () => {
   // Estado del carrito de compras
@@ -22,7 +23,6 @@ const App = () => {
 
   return (
     <div>
-      <Login />
       <Routes>
         <Route
           path="/"
@@ -33,10 +33,12 @@ const App = () => {
             </>
           }
         />
+        <Route path="/login" element={<Login />} />
         <Route
           path="/carrito"
           element={<Carrito cart={cart} handleRemove={handleRemove} />}
         />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );
