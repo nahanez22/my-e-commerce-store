@@ -1,15 +1,12 @@
 import React, { useState } from "react";
+import { useContext } from "react";
+
+import { CartContext } from "../Context";
 
 // Componente de regalo individual
-const Gift = ({
-  gift,
-  handleAdd,
-  handleRemove,
-  inCart,
-  setGifts,
-  giftsList,
-}) => {
+const Gift = ({ gift, handleRemove, inCart, setGifts, giftsList }) => {
   const [quantity, setQuantity] = useState(1); // Inicializar la cantidad con un valor predeterminado de 1
+  const { handleAdd } = useContext(CartContext); // Acceder al contexto y obtener el método handleAdd
 
   if (gift.cantidad <= 0) {
     return null; // Si la cantidad es igual a cero, no se muestra el componente
@@ -25,12 +22,13 @@ const Gift = ({
           alt={gift.titulo}
           style={{ width: "100px", height: "100px" }}
         />
-        <h2>{gift.Titulo}</h2>
-        <p>{gift.precio}</p>
-        <p>Cantidad: {gift.cantidad}</p>
-        <button onClick={() => handleRemove(gift.id)}>
-          Eliminar del carrito
-        </button>
+        <h2>{gift.titulo}</h2>
+        <p>{gift.descripcion}</p>
+        <p>Precio: ${gift.precio}</p>
+        <p>
+          Cantidad: {gift.cantidad}
+          <button onClick={() => handleRemove(gift.id)}>Eliminar</button>
+        </p>
       </main>
     );
   } else {
@@ -43,31 +41,26 @@ const Gift = ({
           alt={gift.titulo}
           style={{ width: "100px", height: "100px" }}
         />
-        <h2>{gift.Titulo}</h2>
-        <p>{gift.precio}</p>
-        <p>Cantidad disponible: {gift.cantidad}</p>
-        <form
-          onSubmit={(event) => {
-            event.preventDefault(); // Prevenir el envío del formulario
-            handleAdd(gift, quantity); // Pasar el regalo y la cantidad seleccionada a la función handleAdd
-            // Actualizar la cantidad disponible en el regalo
-            const updatedGift = { ...gift, cantidad: gift.cantidad - quantity };
-            setGifts(
-              giftsList.map((g) => (g.id === updatedGift.id ? updatedGift : g))
-            );
-          }}
-        >
-          <label htmlFor="quantity">Cantidad a comprar:</label>
-          <input
-            type="number"
-            id="quantity"
+        <h2>{gift.titulo}</h2>
+        <p>{gift.descripcion}</p>
+        <p>Precio: ${gift.precio}</p>
+        <p>
+          Cantidad:{" "}
+          <select
             value={quantity}
-            onChange={(event) => setQuantity(event.target.value)}
-          />
-          <button type="submit">Agregar al carrito</button>
-        </form>
+            onChange={(e) => setQuantity(e.target.value)}
+          >
+            {[...Array(gift.cantidad).keys()].map((i) => (
+              <option key={i + 1} value={i + 1}>
+                {i + 1}
+              </option>
+            ))}
+          </select>
+          <button onClick={() => handleAdd(gift, quantity)}>Añadir</button>
+        </p>
       </main>
     );
   }
 };
+
 export default Gift;
